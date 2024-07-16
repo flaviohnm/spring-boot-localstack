@@ -33,5 +33,5 @@ build/
 .vscode/
 
 ### LocalStack ###
-**/volume
+**/volume/
 /logs/
