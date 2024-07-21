@@ -1,4 +1,4 @@
-package br.com.monteiro.ssm.configuration;
+package br.com.monteiro.parameterstore.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties
 public class ParameterStoreConfiguration {
-
 
     @Value("${helloWorld}")
     private String helloWorld;
