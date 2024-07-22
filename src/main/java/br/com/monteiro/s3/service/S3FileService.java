@@ -1,8 +1,7 @@
 package br.com.monteiro.s3.service;
 
 import br.com.monteiro.s3.exception.FileListenerException;
-import com.amazonaws.services.s3.AmazonS3;
-import io.awspring.cloud.core.io.s3.PathMatchingSimpleStorageResourcePatternResolver;
+import io.awspring.cloud.s3.S3PathMatchingResourcePatternResolver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +11,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.WritableResource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
+import software.amazon.awssdk.services.s3.S3Client;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -36,8 +36,8 @@ public class S3FileService {
     private ResourcePatternResolver resourcePatternResolver;
 
     @Autowired
-    public void setupResolver(ApplicationContext applicationContext, AmazonS3 amazonS3) {
-        this.resourcePatternResolver = new PathMatchingSimpleStorageResourcePatternResolver(amazonS3, applicationContext);
+    public void setupResolver(S3Client s3Client, ApplicationContext applicationContext) {
+        this.resourcePatternResolver = new S3PathMatchingResourcePatternResolver(s3Client, applicationContext);
     }
 
     public boolean isFileExists(String file) {

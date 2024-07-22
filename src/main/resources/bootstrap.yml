@@ -10,7 +10,6 @@ spring:
       - aws-parameterstore:/config/spring-boot-localstack/
       - aws-secretsmanager:/secrets/stringKey1
 
-
   cloud:
     aws:
       endpoint: localhost:4566
@@ -39,3 +38,7 @@ spring:
         enable: true
         region: us-east-1
         endpoint: http://localhost:4566
+      s3:
+        enable: true
+        region: us-east-1
+        endpoint: http://s3.localhost.localstack.cloud:4566/
