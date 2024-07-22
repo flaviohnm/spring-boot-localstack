@@ -1,7 +1,6 @@
 package br.com.monteiro.sns.service;
 
-import com.amazonaws.services.sns.AmazonSNS;
-import io.awspring.cloud.messaging.core.NotificationMessagingTemplate;
+import io.awspring.cloud.sns.core.SnsTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,15 +13,15 @@ public class SnsNotificationService {
     @Value("${snsNotificationName}")
     private String notificationName;
 
-    private final NotificationMessagingTemplate notificationMessagingTemplate;
+    private final SnsTemplate snsTemplate;
 
     @Autowired
-    public SnsNotificationService(AmazonSNS amazonSns) {
-        this.notificationMessagingTemplate = new NotificationMessagingTemplate(amazonSns);
+    public SnsNotificationService(SnsTemplate snsTemplate) {
+        this.snsTemplate = snsTemplate;
     }
 
     public void sendNotification(String subject, Object message, Map<String, Object> headers) {
-        this.notificationMessagingTemplate.convertAndSend(notificationName, message, headers);
+        this.snsTemplate.convertAndSend(notificationName, message, headers);
     }
 
 }
