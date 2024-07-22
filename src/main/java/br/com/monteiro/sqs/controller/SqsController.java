@@ -1,7 +1,8 @@
 package br.com.monteiro.sqs.controller;
 
-import br.com.monteiro.sqs.service.SqsMessageService;
+import io.awspring.cloud.sqs.operations.SqsTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class SqsController {
 
+    @Value("${sqsQueueName}")
+    private String queueName;
+
     @Autowired
-    private SqsMessageService sqsMessageService;
+    private SqsTemplate sqsTemplate;
 
     @GetMapping("/sendMessage")
     public ResponseEntity<?> sendMessage(@RequestParam("message") String message) {
-        sqsMessageService.sendMessage(message);
+        sqsTemplate.send(queueName,message);
         return ResponseEntity.ok().build();
     }
 
