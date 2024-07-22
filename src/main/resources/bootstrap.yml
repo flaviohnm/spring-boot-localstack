@@ -6,7 +6,10 @@ spring:
   config:
     activate:
       on-profile: localstack
-    import: aws-parameterstore:/config/spring-boot-localstack/
+    import:
+      - aws-parameterstore:/config/spring-boot-localstack/
+      - aws-secretsmanager:/secrets/stringKey1
+
 
   cloud:
     aws:
@@ -24,7 +27,7 @@ spring:
         enable: true
         region: us-east-1
         endpoint: http://localhost:4566
-#      secretsmanager:
-#        enable: true
-#        region: us-east-1
-#        endpoint: http://localhost:4566
+      secretsmanager:
+        enable: true
+        region: us-east-1
+        endpoint: http://localhost:4566
