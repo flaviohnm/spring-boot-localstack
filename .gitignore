@@ -19,5 +19,4 @@ target/
 *.ipr
 
 ### LocalStack ###
-**/volume/
 /logs/
